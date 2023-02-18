@@ -1,85 +1,47 @@
+import { useState } from "react";
 
+
+    
 class Osoba{
-
+    id = -1;
     nazwa = "";
     dataUrodzenia =  new Date();
     email = "";
-    constructor(nazwa, dataUrodzenia, email) {
+    constructor(id, nazwa, dataUrodzenia, email) {
+        this.id = id
         this.nazwa = nazwa;
         this.dataUrodzenia = dataUrodzenia;
         this.email = email;
 
     }
 }
+const test1 = new Osoba (1,"Jan Kowalski", '01 Jan 1970', "asasa@sasa.pl");
+const test2 = new Osoba (2,"Jan Nowak", '15 May 1985', "jn@pl.pl");
+const test3 = new Osoba (3,"Joe Doe", '25 May 1999', "jdoe@com.pl");
+let userslist = [test1, test2, test3]
 
-const test1 = new Osoba ("Jan Kowalski", Date.parse('01 Jan 1970'), "asasa@sasa.pl");
-const test2 = new Osoba ("Jan Nowak", Date.parse('15 May 1985'), "jn@pl.pl");
-const test3 = new Osoba ("Joe Doe", Date.parse('25 May 1999'), "jdoe@com.pl");
-
-function WyswietlInfo(value)
-{
- 
-        if (value == "Jan Kowalski"){
-            return (
-        <>
-        <h1>hello, {test1.nazwa}!
+function SelectFunction() {
     
-        data urodzenia: {test1.dataUrodzenia}!
-    
-        email: {test1.email}!
-        
-        </h1> 
-        </>
-            );
-        }
-        else if (value == "Jan Nowak"){
-            return (  <>
-            <h1>hello, {test2.nazwa}!
-        
-            data urodzenia: {test2.dataUrodzenia}!
-        
-            email: {test2.email}!
-            
-            </h1> 
-            </>
-             );}
-        else  if (value == "Joe Doe"){
-            return (     <>
-                <h1>hello, {test3.nazwa}!
-            
-                data urodzenia: {test3.dataUrodzenia}!
-            
-                email: {test3.email}!
-                
-                </h1> 
-                </>
-                 );}
-    
-   
-}
-
-function SelectFunction()
-{
-
-
-    
-
-
-return(
-    
-    <form>
-      <label>
-        Wybierz osobe
-        <br></br>
-        <select onChange={WyswietlInfo("Jan Kowalski")}>
-          <option value="Jan Kowalski">Jan Kowalski</option>
-          <option value="Jan Nowak">Jan Nowak</option>
-          <option value="Joe Doe" >Joe Doe</option>
+    const [selected, setSelected] = useState(userslist[0]);
+    const handleChange = event => {
+       
+      setSelected(userslist.find(user => user.id==event.target.value));
+    };
+  
+  
+    return (
+      <div className="Select">
+        <select onChange={handleChange}>
+          { userslist.map(osoba => <option value={osoba.id}>{osoba.nazwa}</option>)}
         </select>
-      </label>
-    </form>
-);
-}  
-
+        <div>
+           {selected.nazwa} <br></br>
+           {selected.dataUrodzenia} <br></br>
+           {selected.email}
+        </div>
+      </div>
+  
+    );
+  }
 
 export default SelectFunction;

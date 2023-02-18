@@ -7,7 +7,7 @@ return(
 
   <h1> User information</h1>
   <SelectFunction></SelectFunction>
-
+  <div class="userInfo"></div>
 
 </>
 );
