@@ -35,7 +35,7 @@ function SelectFunction() {
           { userslist.map(osoba => <option value={osoba.id}>{osoba.nazwa}</option>)}
         </select>
         <div>
-           {selected.nazwa} <br></br>
+          <h1> {selected.nazwa} <br></br></h1>
            {selected.dataUrodzenia} <br></br>
            {selected.email}
         </div>
